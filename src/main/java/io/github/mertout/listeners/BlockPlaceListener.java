@@ -26,7 +26,7 @@ public class BlockPlaceListener extends ClaimManager implements Listener {
                                     return;
                                 }
                             }
-                            ClaimCreateEvent event = new ClaimCreateEvent();
+                            ClaimCreateEvent event = new ClaimCreateEvent(e.getPlayer());
                             Bukkit.getServer().getPluginManager().callEvent(event);
                             if (!event.isCancelled()) {
                                 super.registerClaim(e.getBlockPlaced().getLocation(), e.getPlayer());
