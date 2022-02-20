@@ -1,0 +1,80 @@
+settings:
+    update-checker: true
+    renew-day-cost: 100000
+    #based seconds
+    move-block-cooldown: 3600 #(1 Hours)
+    #if attacker is not attached in the claim
+    pvp-in-claim: true
+    #disabled commands in the claim
+    #the player cannot write these commands if they are not attached in the claim
+    disabled-commands:
+        - "sethome"
+        - "tpaccept"
+    disabled-worlds:
+        - "world_the_end"
+    gui:
+        member-list:
+            gui-title: "&8Member list."
+            item-name: "&e&n{player}"
+        member-remove:
+            gui-title: "&8Member remove."
+            item-name: "&e&n{player}"
+    claim-block-name: "&aClaim block"
+    claim-gui:
+        gui-type: DISPENSER
+        gui-title: "&8Claim management"
+        gui-size: 1
+        items:
+            1:
+                Material: MAP
+                Display-Name: "#88B04BMember list."
+                Slot: 0
+                Action: "[Member-List]"
+            2:
+                Material: ANVIL
+                Display-Name: "#88B04BMember add."
+                Slot: 1
+                Action: "[Member-Add]"
+            3:
+                Material: HOPPER
+                Display-Name: "#88B04BMember remove."
+                Slot: 2
+                Action: "[Member-Remove]"
+            4:
+                Material: FIREWORK_ROCKET
+                Display-Name: "#88B04BRenew day."
+                Slot: 6
+                Action: "[Renew-Day]"
+            5:
+                Material: BARRIER
+                Display-Name: "#DD4124Delete claim!"
+                Slot: 7
+                Action: "[Delete-Claim]"
+            6:
+                Material: BEDROCK
+                Display-Name: "#45B8ACMove claim block!"
+                Slot: 8
+                Action: "[Move-Claim-Block]"
+            glass1:
+                Material: GRAY_STAINED_GLASS_PANE
+                Slot: 3
+            glass2:
+                Material: GRAY_STAINED_GLASS_PANE
+                Slot: 4
+            glass3:
+                Material: GRAY_STAINED_GLASS_PANE
+                Slot: 5
+    hologram:
+            time-format:
+                    days: "d"
+                    hours: "h"
+                    minutes: "m"
+                    seconds: "s"
+            hologram-height: 3
+            hologram-lines:
+                - "#EFC050{owner}"
+                - ""
+                - "#6B5B95Remaining time: &f{remaining-time}"
+                - "#6B5B95Team size: &f{team-size}"
+                - ""
+                - "#F7CAC9Click to manage!"
