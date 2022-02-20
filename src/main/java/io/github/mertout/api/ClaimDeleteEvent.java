@@ -1,6 +1,7 @@
 package io.github.mertout.api;
 
 import io.github.mertout.core.data.DataHandler;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 
 import org.bukkit.event.Event;
@@ -10,11 +11,13 @@ import org.jetbrains.annotations.NotNull;
 public class ClaimDeleteEvent extends Event implements Cancellable {
 
     public DataHandler data;
+    public Player p;
     public static final HandlerList handlers = new HandlerList();
     public boolean cancelled;
 
-    public ClaimDeleteEvent(@NotNull DataHandler data) {
-        this.data = data;
+    public ClaimDeleteEvent(@NotNull DataHandler x, Player y) {
+        this.data = x;
+        this.p = y;
     }
 
     @Override
@@ -34,5 +37,9 @@ public class ClaimDeleteEvent extends Event implements Cancellable {
 
     public DataHandler getData() {
         return data;
+    }
+
+    public Player getPlayer() {
+        return p;
     }
 }
