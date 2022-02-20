@@ -107,7 +107,7 @@ public class ClaimManager {
         if (PlayerToClaim(p) != null) {
             DataHandler data = PlayerToClaim(p);
             if (data.getOwner().equals(p.getName())) {
-                ClaimDeleteEvent event = new ClaimDeleteEvent(data);
+                ClaimDeleteEvent event = new ClaimDeleteEvent(data, p);
                 Bukkit.getServer().getPluginManager().callEvent(event);
                 if (!event.isCancelled()) {
                     Location loc = data.getBlockLocation();
