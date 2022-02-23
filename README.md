@@ -1,1 +1,1 @@
-Required: Java 16+, Vault, Holographic Displays
+## Required: Java 16+, Vault, Holographic Displays
