@@ -5,7 +5,7 @@ import com.gmail.filoghost.holographicdisplays.api.HologramsAPI;
 import io.github.mertout.Claim;
 import io.github.mertout.core.ClaimManager;
 import io.github.mertout.core.data.DataHandler;
-import io.github.mertout.addons.HexColor;
+import io.github.mertout.utils.HexColor;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
