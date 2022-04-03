@@ -3,6 +3,7 @@
 > _Required: Java 16+, Vault, Placeholders API(optional), Holographic Displays_
 
 *For the Maven projects; *
+```xml
 <dependencies>
     <dependency>
         <groupId>github.mertout</groupId>
@@ -11,3 +12,4 @@
         <scope>provided</scope>
     </dependency>
 </dependencies>
+```
