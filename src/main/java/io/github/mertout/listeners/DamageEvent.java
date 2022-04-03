@@ -12,7 +12,7 @@ public class DamageEvent extends ClaimManager implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent e) {
-        if (e.getDamager() instanceof Player) {
+        if (e.getDamager() instanceof Player)  {
             if (e.getEntity() instanceof Player) {
                 if (super.getChunk(e.getDamager().getLocation()) != null && Claim.getInstance().getClaimManager().getChunk(e.getEntity().getLocation()) != null) {
                     if (!Claim.getInstance().getConfig().getBoolean("settings.pvp-in-claim")) {
