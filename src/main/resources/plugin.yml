@@ -1,6 +1,6 @@
 name: XClaim
 author: mert_out
-version: 1.0
+version: 1.1
 api-version: 1.13
 main: io.github.mertout.Claim
 depends: [Holographic Displays, Vault]
