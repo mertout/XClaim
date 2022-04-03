@@ -1,11 +1,11 @@
 package io.github.mertout.listeners;
 
 import io.github.mertout.Claim;
-import io.github.mertout.addons.XMaterial;
+import io.github.mertout.utils.XMaterial;
 import io.github.mertout.core.ClaimManager;
 import io.github.mertout.core.data.DataHandler;
 import io.github.mertout.gui.GuiManager;
-import io.github.mertout.addons.HexColor;
+import io.github.mertout.utils.HexColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
