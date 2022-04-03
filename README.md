@@ -2,7 +2,7 @@
 
 > _Required: Java 16+, Vault, Placeholders API(optional), Holographic Displays_
 
-*For the Maven projects;
+Maven:
 ```xml
 <dependencies>
     <dependency>
