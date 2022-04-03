@@ -7,12 +7,13 @@ import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockExpEvent;
 
 public class BlockBreakListener extends ClaimManager implements Listener {
 
     @EventHandler
     public void onBreak(BlockBreakEvent e) {
-        if (Claim.getInstance().getClaimManager().hasClaimAtLoc(e.getBlock().getLocation(),e.getPlayer())) {
+        if (super.hasClaimAtLoc(e.getBlock().getLocation(),e.getPlayer())) {
             e.setCancelled(true);
         }
         else {
