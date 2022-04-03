@@ -1,6 +1,6 @@
 ## XClaim
 
-> _Required: Java 16+, Vault, Placeholders API(optional), Holographic Displays_
+> _Required: Java 16+, Vault, Placeholders API(optional), Holographic Displays, EssentialsX_
 
 Maven:
 ```xml
