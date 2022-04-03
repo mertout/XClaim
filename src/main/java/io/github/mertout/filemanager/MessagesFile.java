@@ -1,7 +1,7 @@
 package io.github.mertout.filemanager;
 
 import io.github.mertout.Claim;
-import io.github.mertout.addons.HexColor;
+import io.github.mertout.utils.HexColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.jetbrains.annotations.NotNull;
