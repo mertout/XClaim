@@ -1,11 +1,13 @@
 package de.tr7zw.changeme.nbtapi;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 
 import de.tr7zw.annotations.FAUtil;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import de.tr7zw.changeme.nbtapi.utils.annotations.AvailableSince;
 import de.tr7zw.changeme.nbtapi.utils.annotations.CheckUtil;
+import org.bukkit.persistence.PersistentDataContainer;
 
 /**
  * NBT class to access vanilla tags from Entities. Entities don't support custom
@@ -32,11 +34,13 @@ public class NBTEntity extends NBTCompound {
 
 	@Override
 	public Object getCompound() {
+	    if(!Bukkit.isPrimaryThread())throw new NbtApiException("Entity NBT needs to be accessed sync!");
 		return NBTReflectionUtil.getEntityNBTTagCompound(NBTReflectionUtil.getNMSEntity(ent));
 	}
 
 	@Override
 	protected void setCompound(Object compound) {
+	    if(!Bukkit.isPrimaryThread())throw new NbtApiException("Entity NBT needs to be accessed sync!");
 		NBTReflectionUtil.setEntityNBTTag(compound, NBTReflectionUtil.getNMSEntity(ent));
 	}
 
@@ -49,7 +53,7 @@ public class NBTEntity extends NBTCompound {
 	@AvailableSince(version = MinecraftVersion.MC1_14_R1)
 	public NBTCompound getPersistentDataContainer() {
 		FAUtil.check(this::getPersistentDataContainer, CheckUtil::isAvaliable);
-		return new NBTPersistentDataContainer(ent.getPersistentDataContainer());
+		return new NBTPersistentDataContainer((PersistentDataContainer) ent);
 	}
 
 }
