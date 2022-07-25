@@ -23,6 +23,7 @@ public enum ClassWrapper {
     NMS_NBTBASE(PackageWrapper.NMS, "NBTBase", null, null, "net.minecraft.nbt", "net.minecraft.nbt.Tag"),
     NMS_NBTTAGSTRING(PackageWrapper.NMS, "NBTTagString", null, null, "net.minecraft.nbt", "net.minecraft.nbt.StringTag"),
     NMS_NBTTAGINT(PackageWrapper.NMS, "NBTTagInt", null, null, "net.minecraft.nbt", "net.minecraft.nbt.IntTag"),
+    NMS_NBTTAGINTARRAY(PackageWrapper.NMS, "NBTTagIntArray", null, null, "net.minecraft.nbt", "net.minecraft.nbt.IntArrayTag"),
     NMS_NBTTAGFLOAT(PackageWrapper.NMS, "NBTTagFloat", null, null, "net.minecraft.nbt", "net.minecraft.nbt.FloatTag"),
     NMS_NBTTAGDOUBLE(PackageWrapper.NMS, "NBTTagDouble", null, null, "net.minecraft.nbt", "net.minecraft.nbt.DoubleTag"),
     NMS_NBTTAGLONG(PackageWrapper.NMS, "NBTTagLong", null, null, "net.minecraft.nbt", "net.minecraft.nbt.LongTag"),
@@ -70,7 +71,9 @@ public enum ClassWrapper {
                 clazz = Class.forName(mojangMap + "." + clazzName);
             } else if (packageId == PackageWrapper.NONE) {
                 clazz = Class.forName(clazzName);
-            } else {
+            } else if (MinecraftVersion.isForgePresent() && MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4 && Forge1710Mappings.getClassMappings().get(this.name()) != null){
+                clazz = Class.forName(clazzName = Forge1710Mappings.getClassMappings().get(this.name()));
+            }else {
                 String version = MinecraftVersion.getVersion().getPackageName();
                 clazz = Class.forName(packageId.getUri() + "." + version + "." + clazzName);
             }
