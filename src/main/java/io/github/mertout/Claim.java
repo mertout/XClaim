@@ -1,118 +1,134 @@
 package io.github.mertout;
 
+import io.github.mertout.listeners.*;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import io.github.mertout.commands.TabComplete;
 import io.github.mertout.commands.XClaim;
-import io.github.mertout.core.ClaimManager;
-import io.github.mertout.core.data.DataHandler;
-import io.github.mertout.core.timer.MoveTimer;
-import io.github.mertout.filemanager.ClaimsFile;
 import io.github.mertout.filemanager.MessagesFile;
-import io.github.mertout.holograms.HologramCore;
-import io.github.mertout.holograms.timer.HologramTimer;
-import io.github.mertout.listeners.*;
+import io.github.mertout.filemanager.ClaimsFile;
 import io.github.mertout.placeholders.Placeholders;
-import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
+import io.github.mertout.holograms.timer.HologramTimer;
+import io.github.mertout.holograms.HologramCore;
+import io.github.mertout.core.timer.MoveTimer;
+import io.github.mertout.core.ClaimManager;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.RegisteredServiceProvider;
+import io.github.mertout.core.data.DataHandler;
+import java.util.ArrayList;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-
-public class Claim extends JavaPlugin {
-
+public class Claim extends JavaPlugin
+{
     public static Claim instance;
-    public final ArrayList<DataHandler> claims = new ArrayList<>();
-    public final ArrayList<Player> memberadd = new ArrayList<>();
-    private Economy economy = null;
+    public final ArrayList<DataHandler> claims;
+    public final ArrayList<Player> memberadd;
+    private Economy economy;
     private ClaimManager cm;
     private MoveTimer mt;
     private HologramCore hc;
 
-    @Override
+    public Claim() {
+        this.claims = new ArrayList<DataHandler>();
+        this.memberadd = new ArrayList<Player>();
+        this.economy = null;
+    }
+    
     public void onEnable() {
-        instance = this;
-        loadClass();
-        loadEvents();
-        loadFiles();
-        checkPlugins();
-        getClaimManager().loadClaims();
+        Claim.instance = this;
+        this.loadClass();
+        this.loadEvents();
+        this.loadFiles();
+        this.checkPlugins();
+        this.getClaimManager().loadClaims();
     }
+    
     public void loadClass() {
-        cm = new ClaimManager();
-        mt = new MoveTimer();
+        this.cm = new ClaimManager();
+        this.mt = new MoveTimer();
         new HologramTimer();
-        hc = new HologramCore();
+        this.hc = new HologramCore();
     }
-    @Override
+    
     public void onDisable() {
-        getClaimManager().saveClaims();
+        this.getClaimManager().saveClaims();
     }
+    
     private void checkPlugins() {
-        if (!setupEconomy()) {
-            System.out.println("Vault not found, shutting down server.");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
+        hc.installHologramPlugin();
+        if (!this.setupEconomy()) {
+            System.out.println("Vault not found, Please install Vault!");
+            this.getServer().getPluginManager().disablePlugin(this);
         }
-        if (Bukkit.getPluginManager().getPlugin("HolographicDisplays") == null) {
-            System.out.println("Holographic Displays not found, shutting down server.");
-            getServer().getPluginManager().disablePlugin(this);
-            return;
-        }
-        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null)
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new Placeholders().register();
+        }
     }
+    
     private void loadFiles() {
-        saveDefaultConfig();
+        this.saveDefaultConfig();
         ClaimsFile.loadClaimFiles();
         MessagesFile.loadMessagesFiles();
     }
+    
     private void loadEvents() {
-        getServer().getPluginManager().registerEvents(new BlockPlaceListener(),this);
-        getServer().getPluginManager().registerEvents(new BlockBreakListener(),this);
-        getServer().getPluginManager().registerEvents(new BlockClickListener(),this);
-        getServer().getPluginManager().registerEvents(new ClickEvent(),this);
-        getServer().getPluginManager().registerEvents(new ChatEvent(),this);
-        getServer().getPluginManager().registerEvents(new CommandEvent(),this);
-        getServer().getPluginManager().registerEvents(new DamageEvent(),this);
-        getCommand("xclaim").setExecutor(new XClaim());
-        getCommand("xclaim").setTabCompleter(new TabComplete());
+        this.getServer().getPluginManager().registerEvents(new BlockPlaceEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new BlockBreakEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new BlockClickEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new ClickEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new ChatEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new CommandEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new DamageEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new ExplodeEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new PistonEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new ItemFrameEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new ArmorStandEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new MinecartEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new ChangeBlockEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new ChunkLoadEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new BowEvent(), this);
+        this.getCommand("xclaim").setExecutor(new XClaim());
+        this.getCommand("xclaim").setTabCompleter(new TabComplete());
     }
+    
     public static Claim getInstance() {
-        return instance;
+        return Claim.instance;
     }
+    
     public Economy getEconomy() {
-        return economy;
+        return this.economy;
     }
-
+    
     public ArrayList<DataHandler> getClaims() {
-
-        return claims;
+        return this.claims;
     }
+    
     private boolean setupEconomy() {
-        if (getServer().getPluginManager().getPlugin("Vault") == null)
+        if (this.getServer().getPluginManager().getPlugin("Vault") == null) {
             return false;
-        RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null)
+        }
+        final RegisteredServiceProvider<Economy> rsp = (RegisteredServiceProvider<Economy>)this.getServer().getServicesManager().getRegistration((Class)Economy.class);
+        if (rsp == null) {
             return false;
-        economy = (Economy)rsp.getProvider();
-        return (economy != null);
+        }
+        this.economy = (Economy)rsp.getProvider();
+        return this.economy != null;
     }
-
+    
     public ClaimManager getClaimManager() {
-        return cm;
+        return this.cm;
     }
-
+    
     public MoveTimer getMoveTimer() {
-        return mt;
+        return this.mt;
     }
-
+    
     public HologramCore getHologramCore() {
-        return hc;
+        return this.hc;
     }
+    
     public ArrayList<Player> getMembers() {
-        return memberadd;
-}
+        return this.memberadd;
+    }
 
 }
