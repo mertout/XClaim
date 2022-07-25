@@ -129,7 +129,9 @@ public enum ReflectionMethod {
     ReflectionMethod(ClassWrapper targetClass, Class<?>[] args, MinecraftVersion addedSince, MinecraftVersion removedAfter, Since... methodnames){
         this.removedAfter = removedAfter;
         this.parentClassWrapper = targetClass;
-        if(!MinecraftVersion.isAtLeastVersion(addedSince) || (this.removedAfter != null && MinecraftVersion.isNewerThan(removedAfter)))return;
+        //Special Case for Modded 1.7.10
+        boolean specialCase = (MinecraftVersion.isForgePresent() && this.name().equals("COMPOUND_MERGE") && MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4); //COMPOUND_MERGE is only present on Crucible, not on vanilla 1.7.10
+        if(!specialCase && (!MinecraftVersion.isAtLeastVersion(addedSince) || (this.removedAfter != null && MinecraftVersion.isNewerThan(removedAfter))))return;
         compatible = true;
     	MinecraftVersion server = MinecraftVersion.getVersion();
         Since target = methodnames[0];
@@ -140,8 +142,11 @@ public enum ReflectionMethod {
         targetVersion = target;
         String targetMethodName = targetVersion.name;
         try{
-            if(targetVersion.version.isMojangMapping())
+            if (MinecraftVersion.isForgePresent() && MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4){
+                targetMethodName = Forge1710Mappings.getMethodMapping().getOrDefault(this.name(), targetMethodName);
+            } else if(targetVersion.version.isMojangMapping()){
                 targetMethodName = MojangToMapping.getMapping().getOrDefault(targetClass.getMojangName() + "#" + targetVersion.name, "Unmapped" + targetVersion.name);
+            }
             method = targetClass.getClazz().getDeclaredMethod(targetMethodName, args);
             method.setAccessible(true);
             loaded = true;
@@ -155,7 +160,7 @@ public enum ReflectionMethod {
                 loaded = true;
                 methodName = targetVersion.name;
             }catch(NullPointerException | NoSuchMethodException | SecurityException ex2){
-                System.out.println("[NBTAPI] Unable to find the method '" + targetMethodName + "' in '" + (targetClass.getClazz() == null ? targetClass.getMojangName() : targetClass.getClazz().getSimpleName()) + "' Args: " + Arrays.toString(args) + " Enum: " + this); //NOSONAR This gets loaded before the logger is loaded
+                MinecraftVersion.getLogger().warning("[NBTAPI] Unable to find the method '" + targetMethodName + "' in '" + (targetClass.getClazz() == null ? targetClass.getMojangName() : targetClass.getClazz().getSimpleName()) + "' Args: " + Arrays.toString(args) + " Enum: " + this); //NOSONAR This gets loaded before the logger is loaded
             }
         }
     }
