@@ -1,9 +1,9 @@
 name: XClaim
 author: mert_out
-version: 1.1
-api-version: 1.13
+version: 1.2
+api-version: 1.16
 main: io.github.mertout.Claim
-depends: [Holographic Displays, Vault]
+depends: [Holographic Displays, Vault, DecentHolograms]
 softdepend: [PlaceholderAPI]
 commands:
   xclaim:
