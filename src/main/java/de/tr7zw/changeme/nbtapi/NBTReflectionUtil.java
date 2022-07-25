@@ -1,5 +1,6 @@
 package de.tr7zw.changeme.nbtapi;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
@@ -70,6 +72,9 @@ public class NBTReflectionUtil {
 		try {
 			return ReflectionMethod.NBTFILE_READ.run(null, stream);
 		} catch (Exception e) {
+			try {
+			    stream.close();
+			}catch(IOException ignore) {}
 			throw new NbtApiException("Exception while reading a NBT File!", e);
 		}
 	}
@@ -461,6 +466,10 @@ public class NBTReflectionUtil {
 				return (NBTList<T>) new NBTDoubleList(comp, key, type, nbt);
 			} else if (clazz == Long.class) {
 				return (NBTList<T>) new NBTLongList(comp, key, type, nbt);
+			} else if (clazz == int[].class) {
+                return (NBTList<T>) new NBTIntArrayList(comp, key, type, nbt);
+			} else if (clazz == UUID.class) {
+                return (NBTList<T>) new NBTUUIDList(comp, key, type, nbt);
 			} else {
 				return null;
 			}
