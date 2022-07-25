@@ -6,6 +6,7 @@ import de.tr7zw.annotations.FAUtil;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import de.tr7zw.changeme.nbtapi.utils.annotations.AvailableSince;
 import de.tr7zw.changeme.nbtapi.utils.annotations.CheckUtil;
+import org.bukkit.persistence.PersistentDataContainer;
 
 public class NBTChunk {
 
@@ -24,7 +25,7 @@ public class NBTChunk {
 	@AvailableSince(version = MinecraftVersion.MC1_16_R3)
 	public NBTCompound getPersistentDataContainer() {
 		FAUtil.check(this::getPersistentDataContainer, CheckUtil::isAvaliable);
-		return new NBTPersistentDataContainer(chunk.getPersistentDataContainer());
+		return new NBTPersistentDataContainer((PersistentDataContainer) chunk);
 	}
 	
 }
