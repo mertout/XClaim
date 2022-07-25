@@ -1,80 +1,115 @@
 settings:
-    update-checker: true
+    lang: en_US
     renew-day-cost: 100000
-    #based seconds
     move-block-cooldown: 3600 #(1 Hours)
     #if attacker is not attached in the claim
+    #can't hit anyone!
     pvp-in-claim: true
+    explosions: false
+    #when you enter the claim, it sends a alerts message to the screen!
+    claim-join-alerts: true
+    #ALL = Broadcast all world the claim expired message
+    #WORLD = Broadcast claim's world the claim expired message
+    claim-expired-broadcast: WORLD
     #disabled commands in the claim
-    #the player cannot write these commands if they are not attached in the claim
+    #the player cannot type these commands if they are not attached in the claim
     disabled-commands:
         - "sethome"
         - "tpaccept"
     disabled-worlds:
+        - "world_nether"
         - "world_the_end"
-    gui:
+    claim-block:
+        material: BEDROCK
+        display-name: "#33ffbbClaim block"
+        lore:
+            - "#f48e9bPlace the block and create the claim!"
+gui:
+    management-gui:
         member-list:
-            gui-title: "&8Member list."
-            item-name: "&e&n{player}"
+            gui-title: "#000000Member list!"
+            material: TARGETED_HEAD
+            display-name: "#115555{player}"
+            lore:
+                - "#808080Status: {status}"
         member-remove:
-            gui-title: "&8Member remove."
-            item-name: "&e&n{player}"
-    claim-block-name: "&aClaim block"
+            gui-title: "#000000Member remove!"
+            material: TARGETED_HEAD
+            display-name: "#115555{player}"
+            lore:
+                - "#808080Status: {status}"
     claim-gui:
         gui-type: DISPENSER
-        gui-title: "&8Claim management"
+        gui-title: "#000000Claim management"
+        #valid for chest only!
         gui-size: 1
         items:
             1:
-                Material: MAP
-                Display-Name: "#88B04BMember list."
-                Slot: 0
-                Action: "[Member-List]"
+                material: MAP
+                display-name: "#88B04BMember list!"
+                lore:
+                    - "#115555Click and see!"
+                slot: 0
+                action: [Member-List]
             2:
-                Material: ANVIL
-                Display-Name: "#88B04BMember add."
-                Slot: 1
-                Action: "[Member-Add]"
+                material: ANVIL
+                display-name: "#88B04BMember add!"
+                lore:
+                    - "#115555Click and add!"
+                slot: 1
+                action: [Member-Add]
             3:
-                Material: HOPPER
-                Display-Name: "#88B04BMember remove."
-                Slot: 2
-                Action: "[Member-Remove]"
+                material: HOPPER
+                display-name: "#88B04BMember remove!"
+                lore:
+                    - "#115555Click and remove!"
+                slot: 2
+                action: [Member-Remove]
             4:
-                Material: FIREWORK_ROCKET
-                Display-Name: "#88B04BRenew day."
-                Slot: 6
-                Action: "[Renew-Day]"
+                material: FIREWORK_ROCKET
+                display-name: "#88B04BRenew day!"
+                lore:
+                    - "#115555Click and renew!"
+                slot: 6
+                action: [Renew-Day]
             5:
-                Material: BARRIER
-                Display-Name: "#DD4124Delete claim!"
-                Slot: 7
-                Action: "[Delete-Claim]"
+                material: BARRIER
+                display-name: "#DD4124Delete claim!"
+                lore:
+                    - "#115555Click and delete!"
+                slot: 7
+                action: [Delete-Claim]
             6:
-                Material: BEDROCK
-                Display-Name: "#45B8ACMove claim block!"
-                Slot: 8
-                Action: "[Move-Claim-Block]"
+                material: BEDROCK
+                display-name: "#45B8ACMove claim block!"
+                lore:
+                    - "#115555Click and move!"
+                slot: 8
+                action: [Move-Claim-Block]
             glass1:
-                Material: GRAY_STAINED_GLASS_PANE
-                Slot: 3
+                material: GRAY_STAINED_GLASS_PANE
+                display-name: " "
+                slot: 3
             glass2:
-                Material: GRAY_STAINED_GLASS_PANE
-                Slot: 4
+                material: GRAY_STAINED_GLASS_PANE
+                display-name: " "
+                slot: 4
             glass3:
-                Material: GRAY_STAINED_GLASS_PANE
-                Slot: 5
-    hologram:
-            time-format:
-                    days: "d"
-                    hours: "h"
-                    minutes: "m"
-                    seconds: "s"
-            hologram-height: 3
-            hologram-lines:
-                - "#EFC050{owner}"
-                - ""
-                - "#6B5B95Remaining time: &f{remaining-time}"
-                - "#6B5B95Team size: &f{team-size}"
-                - ""
-                - "#F7CAC9Click to manage!"
+                material: GRAY_STAINED_GLASS_PANE
+                display-name: " "
+                slot: 5
+claim-hologram:
+    settings:
+        time-format:
+            days: "d"
+            hours: "h"
+            minutes: "m"
+            seconds: "s"
+        hologram-height: 3
+        hologram-lines:
+            - "#EFC050{owner}"
+            - ""
+            - "#6B5B95Remaining time: &f{remaining-time}"
+            - "#6B5B95Team size: &f{team-size}"
+            - ""
+            - "#F7CAC9Click to manage!"
