@@ -1,22 +1,33 @@
 package io.github.mertout.commands;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.util.StringUtil;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
+import java.util.Collection;
+import org.bukkit.util.StringUtil;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.bukkit.command.Command;
+import org.jetbrains.annotations.NotNull;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 
-public class TabComplete implements TabCompleter {
+public class TabComplete implements TabCompleter
+{
     @Nullable
-    @Override
-    public List<String> onTabComplete(@NotNull CommandSender cs, @NotNull Command cmd, @NotNull String s, @NotNull String[] strings) {
+    public List<String> onTabComplete(@NotNull final CommandSender cs, @NotNull final Command cmd, @NotNull final String s, @NotNull final String[] strings) {
         if (strings.length == 1) {
-            return StringUtil.copyPartialMatches(strings[0], Arrays.asList(new String[]{"give", "reload"}), new ArrayList<>());
+            if (cs.hasPermission("xclaim.give") && cs.hasPermission("xclaim.reload")) {
+                return (List<String>)StringUtil.copyPartialMatches(strings[0], Arrays.asList("give", "reload"), (Collection)new ArrayList());
+            }
+            else if (cs.hasPermission("xclaim.give")) {
+                return (List<String>)StringUtil.copyPartialMatches(strings[0], Arrays.asList("give"), (Collection)new ArrayList());
+            }
+            else if (cs.hasPermission("xclaim.reload")) {
+                return (List<String>)StringUtil.copyPartialMatches(strings[0], Arrays.asList("reload"), (Collection)new ArrayList());
+            }
+            else if (cs.hasPermission("xclaim.reload")) {
+                return null;
+            }
         }
         return null;
     }
