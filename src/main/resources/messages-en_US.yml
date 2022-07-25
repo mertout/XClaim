@@ -1,0 +1,39 @@
+messages:
+  prefix: '&6Claim &8»'
+  created-claims: '{prefix} &aSuccessfully created claim.'
+  already-have-claims: '{prefix} &cAlready have claims!'
+  member-adding: '{prefix} &aType the name of the member you want to add to the chat
+    &7(&cType &6- &cto cancel&7).'
+  member-added: '{prefix} &aSuccessfully &e{player} &ato claim.'
+  deleted-claim: '{prefix} &aSuccessfully deleted claim.'
+  arg-error: '{prefix} &cArg error!'
+  doesnt-permission: '{prefix} &cDoesn''t have permission!'
+  invalid-arg: '{prefix} &cInvalid arg!'
+  only-player: Only players can use this command!
+  claim-expired: '{prefix} &cClaim has expired!(&6x: {x}, y: {y}, z: {z}, world: {world}&c)'
+  add-error: '{prefix} &cCan''t add yourself!'
+  no-player-in-claim: '{prefix} &cThere is no one in the claim!'
+  player-not-found: '{prefix} &cPlayer not found!'
+  reloaded-files: '{prefix} &aAll files have been reloaded!'
+  kicked-claim: '{prefix} &e{player} &awas kicked out of the claim!'
+  renewed-day: '{prefix} &aSuccessfully renewed claim days &7(&aTotal: &e{day}&ad,
+    &e{hour}&ah, &e{minute}&am, &e{second}&as&7)'
+  dont-have-money: '{prefix} &cYou don''t have enough money (&6Required: {money}&c)!'
+  disabled-commands-in-claim: '{prefix} &cThe &6/{command} &cis disabled in the claim!'
+  disabled-pvp-in-claim: '{prefix} &cPvp disabled in the claim!'
+  disabled-worlds: '{prefix} &cThe claim is disabled in the world you are in'
+  moved-claim-block: '{prefix} &aSuccessfully moved the claim block.'
+  move-claim-block-cooldown: '{prefix} &cMove the claim block again: you need to wait
+    &6{hour} &chours, &6{minute} &cminutes and &6{second} &cseconds'
+  move-claim-block-error: '{prefix} &cTargeted chunk is not yours!'
+  member-add-canceled: '{prefix} &cAdding member has been canceled!'
+  player-is-not-online: '{prefix} &6{player} &cis not online!'
+  join-alerts:
+    title: '&6&lCLAIM'
+    sub-title: '&fYou have entered &e{owner}''s &fclaim'
+  status:
+    online: '&aOnline!'
+    offline: '&cOffline!'
+  ownership:
+    taken: '&aOwned!'
+    untaken: '&aUnowned!'
