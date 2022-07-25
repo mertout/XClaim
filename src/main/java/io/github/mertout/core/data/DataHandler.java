@@ -1,15 +1,13 @@
 package io.github.mertout.core.data;
 
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
+import org.bukkit.Location;
 
-
-public class DataHandler {
-
+public class DataHandler
+{
     private String chunk;
     private Location bloc;
     private String owner;
@@ -17,61 +15,88 @@ public class DataHandler {
     private Integer hour;
     private Integer minutes;
     private Integer seconds;
-    private Hologram holo;
-    private final List<String> members = new ArrayList<>();
+    private Hologram holohd;
+    private eu.decentsoftware.holograms.api.holograms.Hologram holodh;
 
+    private final List<String> members;
+    
+    public DataHandler() {
+        this.members = new ArrayList<String>();
+    }
+    
     public String getChunk() {
-        return chunk;
+        return this.chunk;
     }
+    
     public Location getBlockLocation() {
-        return bloc;
+        return this.bloc;
     }
+    
     public String getOwner() {
-        return owner;
+        return this.owner;
     }
+    
     public Integer getDay() {
-        return day;
+        return this.day;
     }
+    
     public Integer getHour() {
-        return hour;
+        return this.hour;
     }
+    
     public Integer getMinutes() {
-        return minutes;
+        return this.minutes;
     }
+    
     public Integer getSeconds() {
-        return seconds;
+        return this.seconds;
     }
-    public Hologram getHolo() {
-        return holo;
+    
+    public Hologram getHoloHD() {
+        return this.holohd;
+    }
+    public eu.decentsoftware.holograms.api.holograms.Hologram getHoloDH() {
+        return this.holodh;
     }
     public List<String> getMembers() {
-        return members;
+        return this.members;
     }
-    public void setChunk(@NotNull String c) {
-       chunk = c;
+    
+    public void setChunk(@NotNull final String c) {
+        this.chunk = c;
     }
-    public void setBlockLocation(@NotNull Location loc) {
-        bloc = loc;
+    
+    public void setBlockLocation(@NotNull final Location loc) {
+        this.bloc = loc;
     }
-    public void setOwner(@NotNull String p) {
-        owner = p;
+    
+    public void setOwner(@NotNull final String p) {
+        this.owner = p;
     }
-    public void setDay(@NotNull Integer d) {
-        day = d;
+    
+    public void setDay(@NotNull final Integer d) {
+        this.day = d;
     }
-    public void setHour(@NotNull Integer h) {
-        hour = h;
+    
+    public void setHour(@NotNull final Integer h) {
+        this.hour = h;
     }
-    public void setMinutes(@NotNull Integer m) {
-        minutes = m;
+    
+    public void setMinutes(@NotNull final Integer m) {
+        this.minutes = m;
     }
-    public void setSeconds(@NotNull Integer s) {
-        seconds = s;
+    
+    public void setSeconds(@NotNull final Integer s) {
+        this.seconds = s;
     }
-    public void setHolo(@NotNull Hologram h) {
-        holo = h;
+    
+    public void setHoloHD(@NotNull final Hologram h) {
+        this.holohd = h;
     }
-    public void addDay(@NotNull Integer d) {
-        day = day + d;
+    public void setHoloDH(@NotNull final eu.decentsoftware.holograms.api.holograms.Hologram h) {
+        this.holodh = h;
+    }
+    public void addDay(@NotNull final Integer d) {
+        this.day += d;
     }
 }
