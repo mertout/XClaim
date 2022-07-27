@@ -33,6 +33,6 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.mertout:XClaim:Tag'
+	implementation 'com.github.mertout:XClaim:1.2-SNAPSHOT'
 }
 ```
