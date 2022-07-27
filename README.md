@@ -9,12 +9,16 @@
 
 Maven:
 ```xml
-<dependencies>
-    <dependency>
-        <groupId>github.mertout</groupId>
-        <artifactId>XClaim</artifactId>
-        <version>1.2-SNAPSHOT</version>
-        <scope>provided</scope>
-    </dependency>
-</dependencies>
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+    
+	<dependency>
+	    <groupId>com.github.mertout</groupId>
+	    <artifactId>XClaim</artifactId>
+	    <version>1.2-SNAPSHOT</version>
+	</dependency>  
 ```
