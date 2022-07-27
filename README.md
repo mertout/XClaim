@@ -7,7 +7,7 @@
 > - Holographic Displays or DecentHolograms
 > - EssentialsX(or different economy plugin)
 
-Maven:
+_Maven:_
 ```xml
 <repositories>
 	<repository>
@@ -21,4 +21,18 @@ Maven:
     <artifactId>XClaim</artifactId>
     <version>1.2-SNAPSHOT</version>
 </dependency>  
+```
+
+_Gradle:_
+```xml
+allprojects {
+	repositories {
+		...
+		maven { url 'https://jitpack.io' }
+	}
+}
+
+dependencies {
+	implementation 'com.github.mertout:XClaim:Tag'
+}
 ```
