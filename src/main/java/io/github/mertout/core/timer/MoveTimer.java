@@ -4,39 +4,37 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.Bukkit;
 import io.github.mertout.Claim;
 import org.bukkit.entity.Player;
+import java.util.Map;
 import java.util.HashMap;
 
-public class MoveTimer implements Runnable
-{
-    private static final HashMap<Player, Integer> task;
-    
-    public void addMoveCooldown(final Player p) {
-        MoveTimer.task.put(p, Claim.getInstance().getConfig().getInt("settings.move-block-cooldown"));
-    }
-    
+public class MoveTimer implements Runnable {
+    private static final Map<Player, Integer> task = new HashMap<>();
+    private final int moveBlockCooldown;
+
     public MoveTimer() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask((Plugin)Claim.getInstance(), (Runnable)this, 0L, 20L);
+        Plugin plugin = Claim.getInstance();
+        moveBlockCooldown = plugin.getConfig().getInt("settings.move-block-cooldown");
+        Bukkit.getScheduler().runTaskTimer(plugin, this, 0L, 20L);
     }
-    
+
+    public void addMoveCooldown(final Player p) {
+        task.put(p, moveBlockCooldown);
+    }
+
     @Override
     public void run() {
-        if (!MoveTimer.task.isEmpty() && Bukkit.getOnlinePlayers().size() > 0) {
-            for (final Player p : Bukkit.getOnlinePlayers()) {
-                final int time = MoveTimer.task.get(p) - 1;
-                MoveTimer.task.remove(p);
-                MoveTimer.task.put(p, time);
-                if (time == 0) {
-                    MoveTimer.task.remove(p);
-                }
+        for (final Map.Entry<Player, Integer> entry : task.entrySet()) {
+            final Player p = entry.getKey();
+            final int time = entry.getValue() - 1;
+            if (time <= 0) {
+                task.remove(p);
+            } else {
+                task.put(p, time);
             }
         }
     }
-    
-    public static HashMap getMoveTask() {
-        return MoveTimer.task;
-    }
-    
-    static {
-        task = new HashMap<Player, Integer>();
+
+    public static Map<Player, Integer> getMoveTask() {
+        return task;
     }
 }

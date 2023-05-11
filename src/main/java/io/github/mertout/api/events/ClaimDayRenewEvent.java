@@ -12,7 +12,7 @@ public class ClaimDayRenewEvent extends Event implements Cancellable {
     public Player p;
 
     public DataHandler data;
-    public static final HandlerList handlers;
+    public static final HandlerList handlers = new HandlerList();
     public boolean cancelled;
 
     public ClaimDayRenewEvent(@NotNull final Player p, @NotNull final DataHandler data) {
@@ -28,10 +28,6 @@ public class ClaimDayRenewEvent extends Event implements Cancellable {
         this.cancelled = arg0;
     }
 
-    public HandlerList getHandlers() {
-        return ClaimDayRenewEvent.handlers;
-    }
-
     public DataHandler getData() {
         return this.data;
     }
@@ -40,7 +36,12 @@ public class ClaimDayRenewEvent extends Event implements Cancellable {
         return p;
     }
 
-    static {
-        handlers = new HandlerList();
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
     }
 }

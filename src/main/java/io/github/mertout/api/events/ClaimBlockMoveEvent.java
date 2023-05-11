@@ -12,7 +12,7 @@ public class ClaimBlockMoveEvent extends Event implements Cancellable {
     public Player p;
 
     public DataHandler data;
-    public static final HandlerList handlers;
+    public static final HandlerList handlers = new HandlerList();
     public boolean cancelled;
 
     public ClaimBlockMoveEvent(@NotNull final Player p, @NotNull final DataHandler data) {
@@ -28,10 +28,6 @@ public class ClaimBlockMoveEvent extends Event implements Cancellable {
         this.cancelled = arg0;
     }
 
-    public HandlerList getHandlers() {
-        return ClaimBlockMoveEvent.handlers;
-    }
-
     public DataHandler getData() {
         return this.data;
     }
@@ -39,8 +35,12 @@ public class ClaimBlockMoveEvent extends Event implements Cancellable {
     public Player getPlayer() {
         return p;
     }
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
 
-    static {
-        handlers = new HandlerList();
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
     }
 }

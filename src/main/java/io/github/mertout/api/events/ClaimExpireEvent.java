@@ -9,7 +9,7 @@ import org.bukkit.event.Event;
 public class ClaimExpireEvent extends Event implements Cancellable
 {
     public DataHandler data;
-    public static final HandlerList handlers;
+    public static final HandlerList handlers = new HandlerList();
     public boolean cancelled;
     
     public ClaimExpireEvent(@NotNull final DataHandler data) {
@@ -23,16 +23,17 @@ public class ClaimExpireEvent extends Event implements Cancellable
     public void setCancelled(final boolean arg0) {
         this.cancelled = arg0;
     }
-    
-    public HandlerList getHandlers() {
-        return ClaimExpireEvent.handlers;
-    }
-    
+
     public DataHandler getData() {
         return this.data;
     }
-    
-    static {
-        handlers = new HandlerList();
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
     }
 }

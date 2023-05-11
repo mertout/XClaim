@@ -9,7 +9,7 @@ import org.bukkit.event.Event;
 public class ClaimCreateEvent extends Event implements Cancellable
 {
     public Player p;
-    public static final HandlerList handlers;
+    public static final HandlerList handlers = new HandlerList();
     public boolean cancelled;
     
     public ClaimCreateEvent(@NotNull final Player x) {
@@ -23,16 +23,17 @@ public class ClaimCreateEvent extends Event implements Cancellable
     public void setCancelled(final boolean arg0) {
         this.cancelled = arg0;
     }
-    
-    public HandlerList getHandlers() {
-        return ClaimCreateEvent.handlers;
-    }
-    
+
     public Player getPlayer() {
         return this.p;
     }
-    
-    static {
-        handlers = new HandlerList();
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
     }
 }

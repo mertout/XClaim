@@ -6,7 +6,7 @@
 
     <groupId>github.mertout</groupId>
     <artifactId>XClaim</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.4-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>XClaim</name>
@@ -30,7 +30,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -38,6 +38,16 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.bstats</pattern>
+                                    <shadedPattern>io.github.mertout.Claim</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>de.tr7zw.changeme.nbtapi</pattern>
+                                    <shadedPattern>io.github.mertout.Claim</shadedPattern>
+                                </relocation>
+                            </relocations>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                         </configuration>
                     </execution>
@@ -77,6 +87,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.bstats</groupId>
+            <artifactId>bstats-bukkit</artifactId>
+            <version>3.0.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>com.github.decentsoftware-eu</groupId>
             <artifactId>decentholograms</artifactId>
             <version>2.5.2</version>
@@ -109,7 +125,7 @@
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>23.0.0</version>
+            <version>24.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -117,6 +133,11 @@
             <artifactId>spigot-api</artifactId>
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tr7zw</groupId>
+            <artifactId>item-nbt-api</artifactId>
+            <version>2.10.0</version>
         </dependency>
     </dependencies>
 </project>

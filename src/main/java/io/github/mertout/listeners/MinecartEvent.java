@@ -10,8 +10,6 @@ public class MinecartEvent extends ClaimManager implements Listener
 {
     @EventHandler
     public void onMinecartEnter(final VehicleEnterEvent e) {
-        if (super.getChunk(e.getVehicle().getLocation()) != null && super.hasClaimAtLoc(e.getVehicle().getLocation(), (Player)e.getEntered())) {
-            e.setCancelled(true);
-        }
+        if (super.getChunkClaim(e.getVehicle().getLocation()) != null && super.hasClaimAtLocation(e.getVehicle().getLocation(), (Player)e.getEntered())) { e.setCancelled(true); }
     }
 }

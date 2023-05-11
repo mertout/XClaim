@@ -1,7 +1,10 @@
 settings:
     lang: en_US
+    update-checker: true
     renew-day-cost: 100000
     move-block-cooldown: 3600 #(1 Hours)
+    claim-day: 30
+    default-max-member-in-claim: 3
     #if attacker is not attached in the claim
     #can't hit anyone!
     pvp-in-claim: true
@@ -11,8 +14,9 @@ settings:
     #ALL = Broadcast all world the claim expired message
     #WORLD = Broadcast claim's world the claim expired message
     claim-expired-broadcast: WORLD
+    data-save-tick: 6000 #(5 minutes) (-1 to disable)
     #disabled commands in the claim
-    #the player cannot type these commands if they are not attached in the claim
+    #the player cannot run these commands if they are not member of claim
     disabled-commands:
         - "sethome"
         - "tpaccept"
@@ -21,95 +25,42 @@ settings:
         - "world_the_end"
     claim-block:
         material: BEDROCK
-        display-name: "#33ffbbClaim block"
+        display-name: "&r&kx #0BDA51Claim Block! &r&kx"
         lore:
-            - "#f48e9bPlace the block and create the claim!"
-gui:
-    management-gui:
-        member-list:
-            gui-title: "#000000Member list!"
-            material: TARGETED_HEAD
-            display-name: "#115555{player}"
-            lore:
-                - "#808080Status: {status}"
-        member-remove:
-            gui-title: "#000000Member remove!"
-            material: TARGETED_HEAD
-            display-name: "#115555{player}"
-            lore:
-                - "#808080Status: {status}"
-    claim-gui:
-        gui-type: DISPENSER
-        gui-title: "#000000Claim management"
-        #valid for chest only!
-        gui-size: 1
-        items:
-            1:
-                material: MAP
-                display-name: "#88B04BMember list!"
-                lore:
-                    - "#115555Click and see!"
-                slot: 0
-                action: [Member-List]
-            2:
-                material: ANVIL
-                display-name: "#88B04BMember add!"
-                lore:
-                    - "#115555Click and add!"
-                slot: 1
-                action: [Member-Add]
-            3:
-                material: HOPPER
-                display-name: "#88B04BMember remove!"
-                lore:
-                    - "#115555Click and remove!"
-                slot: 2
-                action: [Member-Remove]
-            4:
-                material: FIREWORK_ROCKET
-                display-name: "#88B04BRenew day!"
-                lore:
-                    - "#115555Click and renew!"
-                slot: 6
-                action: [Renew-Day]
-            5:
-                material: BARRIER
-                display-name: "#DD4124Delete claim!"
-                lore:
-                    - "#115555Click and delete!"
-                slot: 7
-                action: [Delete-Claim]
-            6:
-                material: BEDROCK
-                display-name: "#45B8ACMove claim block!"
-                lore:
-                    - "#115555Click and move!"
-                slot: 8
-                action: [Move-Claim-Block]
-            glass1:
-                material: GRAY_STAINED_GLASS_PANE
-                display-name: " "
-                slot: 3
-            glass2:
-                material: GRAY_STAINED_GLASS_PANE
-                display-name: " "
-                slot: 4
-            glass3:
-                material: GRAY_STAINED_GLASS_PANE
-                display-name: " "
-                slot: 5
-claim-hologram:
-    settings:
-        time-format:
-            days: "d"
-            hours: "h"
-            minutes: "m"
-            seconds: "s"
-        hologram-height: 3
-        hologram-lines:
-            - "#EFC050{owner}"
-            - ""
-            - "#6B5B95Remaining time: &f{remaining-time}"
-            - "#6B5B95Team size: &f{team-size}"
-            - ""
-            - "#F7CAC9Click to manage!"
+            - "#808080&oPlace the block and create the claim!"
+    sounds:
+        CLAIM-CREATE:
+            enabled: true
+            type: ENTITY_PLAYER_LEVELUP
+            volume: 0.50
+            pitch: 1.0
+        OPEN-MANAGAMENT:
+            enabled: true
+            type: BLOCK_CHEST_OPEN
+            volume: 0.50
+            pitch: 1.0
+        MEMBER-ADD:
+            enabled: true
+            type: ENTITY_EXPERIENCE_ORB_PICKUP
+            volume: 0.75
+            pitch: 1.0
+        MEMBER-REMOVE:
+            enabled: true
+            type: BLOCK_AMETHYST_BLOCK_BREAK
+            volume: 0.75
+            pitch: 1.0
+        CLAIM-DELETE:
+            enabled: true
+            type: ENTITY_ZOMBIE_BREAK_WOODEN_DOOR
+            volume: 0.50
+            pitch: 1.0
+        MOVE-BLOCK:
+            enabled: true
+            type: ENTITY_EXPERIENCE_ORB_PICKUP
+            volume: 0.75
+            pitch: 1.0
+        RENEW-DAY:
+            enabled: true
+            type: ENTITY_PLAYER_LEVELUP
+            volume: 0.50
+            pitch: 1.0

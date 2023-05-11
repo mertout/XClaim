@@ -1,0 +1,21 @@
+gui:
+  title: "#000000Member List"
+  type: CHEST
+  size: 6 #size is valid for chest only!
+  items:
+    MEMBER: #Don't change it!
+      material: TARGETED_HEAD
+      display-name: "#FFA500{player}"
+      lore:
+        - "#808080Status: {status}"
+        - ""
+        - "#FF0000Left Click to Kick It!"
+    glass:
+      material: BLACK_STAINED_GLASS_PANE
+      display-name: " "
+      slots:
+        - 0-9
+        - 17-18
+        - 26-27
+        - 35-36
+        - 44-53

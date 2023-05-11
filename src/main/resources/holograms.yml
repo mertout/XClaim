@@ -1,0 +1,15 @@
+settings:
+  time-format:
+    days: "d"
+    hours: "h"
+    minutes: "m"
+    seconds: "s"
+  hologram-height: 3.5
+  hologram-lines:
+    - "#FFFF00{owner}"
+    - ""
+    - "&fRemaining time: #0BDA51{remaining-time}"
+    - "&fCreation Date: #0BDA51{creation-date}"
+    - "&fTeam size: #0BDA51{team-size}"
+    - ""
+    - "#00FF00Click to manage!"

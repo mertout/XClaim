@@ -11,7 +11,7 @@ public class ChangeBlockEvent extends ClaimManager implements Listener
     @EventHandler
     public void onChange(final EntityChangeBlockEvent e) {
         if(e.getEntity() instanceof Player) {
-            if (super.getChunk(e.getBlock().getLocation()) != null && super.hasClaimAtLoc(e.getBlock().getLocation(), (Player)e.getEntity())) {
+            if (super.getChunkClaim(e.getBlock().getLocation()) != null && super.hasClaimAtLocation(e.getBlock().getLocation(), (Player)e.getEntity())) {
                 e.setCancelled(true);
             }
         }

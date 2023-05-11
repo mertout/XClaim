@@ -15,7 +15,7 @@ public class ClaimDeleteEvent extends Event implements Cancellable
 {
     public DataHandler data;
     public Player p;
-    public static final HandlerList handlers;
+    public static final HandlerList handlers = new HandlerList();
     public boolean cancelled;
     
     public ClaimDeleteEvent(@NotNull final DataHandler x, final Player y) {
@@ -30,11 +30,7 @@ public class ClaimDeleteEvent extends Event implements Cancellable
     public void setCancelled(final boolean arg0) {
         this.cancelled = arg0;
     }
-    
-    public HandlerList getHandlers() {
-        return ClaimDeleteEvent.handlers;
-    }
-    
+
     public DataHandler getData() {
         return this.data;
     }
@@ -42,8 +38,13 @@ public class ClaimDeleteEvent extends Event implements Cancellable
     public Player getPlayer() {
         return this.p;
     }
-    
-    static {
-        handlers = new HandlerList();
+
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
+
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
     }
 }
