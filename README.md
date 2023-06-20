@@ -4,7 +4,7 @@
 > - Java 16+
 > - Vault
 > - Placeholders API(optional)
-> - DecentHolograms
+> - Holographic Displays or DecentHolograms
 > - EssentialsX(or different economy plugin)
 
 _Maven:_
@@ -19,7 +19,7 @@ _Maven:_
 <dependency>
     <groupId>com.github.mertout</groupId>
     <artifactId>XClaim</artifactId>
-    <version>1.5.1-SNAPSHOT</version>
+    <version>1.4</version>
 </dependency>  
 ```
 
@@ -33,6 +33,6 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.mertout:XClaim:1.4-SNAPSHOT'
+	implementation 'com.github.mertout:XClaim:1.4'
 }
 ```
