@@ -6,13 +6,14 @@ import org.bukkit.Bukkit;
 import io.github.mertout.api.events.ClaimCreateEvent;
 import io.github.mertout.filemanager.files.MessagesFile;
 import io.github.mertout.Claim;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import io.github.mertout.core.ClaimManager;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 public class PlaceEvent extends ClaimManager implements Listener
 {
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onPlace(BlockPlaceEvent e) {
         if (super.hasClaimAtLocation(e.getBlock().getLocation(), e.getPlayer())) {
             if (e.getPlayer().hasPermission("xclaim.bypass") || e.getPlayer().isOp()) {
@@ -23,9 +24,8 @@ public class PlaceEvent extends ClaimManager implements Listener
         }
         NBTItem nbti = new NBTItem(e.getItemInHand());
         if (nbti.getBoolean("claimblock")) {
-            if (super.hasClaim(e.getPlayer())) {
+            if (super.getChunkClaim(e.getPlayer().getLocation()) != null) {
                 e.setCancelled(true);
-                e.getPlayer().sendMessage(MessagesFile.convertString("messages.already-have-claims"));
                 return;
             }
             for (final String str : Claim.getInstance().getConfig().getStringList("settings.disabled-worlds")) {

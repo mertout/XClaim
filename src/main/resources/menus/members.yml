@@ -1,15 +1,8 @@
 gui:
-  title: "#000000Member List"
+  title: "#000000Member List #{page}"
   type: CHEST
   size: 6 #size is valid for chest only!
   items:
-    MEMBER: #Don't change it!
-      material: TARGETED_HEAD
-      display-name: "#FFA500{player}"
-      lore:
-        - "#808080Status: {status}"
-        - ""
-        - "#FF0000Left Click to Kick It!"
     glass:
       material: BLACK_STAINED_GLASS_PANE
       display-name: " "
@@ -19,3 +12,25 @@ gui:
         - 26-27
         - 35-36
         - 44-53
+    MEMBER: #Don't change it!
+      display-name: "#FFA500{player}"
+      lore:
+        - "#808080Status: {status}"
+        - ""
+        - "#FF0000Left Click to Kick It!"
+    NEXT-PAGE: #Don't change it!
+      material: ARROW
+      display-name: "#0FFF50Next Page"
+      slot: 50
+      lore:
+        - "#808080Click and go to the next page!"
+    PREVIOUS-PAGE: #Don't change it!
+      material: ARROW
+      display-name: "#FF0000Previous Page"
+      slot: 48
+      lore:
+        - "#808080Click and go to the previous page!"
+    CURRENT-PAGE: #Don't change it!
+      material: SUNFLOWER
+      display-name: "#FFFF00Current Page: #FFAC1C{page}"
+      slot: 49

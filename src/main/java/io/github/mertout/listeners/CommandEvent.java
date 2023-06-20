@@ -3,13 +3,14 @@ package io.github.mertout.listeners;
 import org.bukkit.event.EventHandler;
 import io.github.mertout.filemanager.files.MessagesFile;
 import io.github.mertout.Claim;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.Listener;
 import io.github.mertout.core.ClaimManager;
 
 public class CommandEvent extends ClaimManager implements Listener
 {
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onCommand(final PlayerCommandPreprocessEvent e) {
         if (super.hasClaimAtLocation(e.getPlayer().getLocation(), e.getPlayer())) {
             final String cmd = e.getMessage().replace("/", "");

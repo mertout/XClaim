@@ -22,6 +22,10 @@ public class MessagesFile {
         if (!MessagesFile.msgfile.exists()) {
             FileManager.saveResource("messages/messages-tr_TR.yml");
         }
+        MessagesFile.msgfile = new File(Claim.getInstance().getDataFolder(), "messages/messages-de_DE.yml");
+        if (!MessagesFile.msgfile.exists()) {
+            FileManager.saveResource("messages/messages-de_DE.yml");
+        }
         selectLang();
     }
 
@@ -29,15 +33,7 @@ public class MessagesFile {
         if (MessagesFile.msgfc.isSet(params1) != false) {
             return HexColor.hex(MessagesFile.msgfc.getString(params1)).replaceAll("&", "§").replace("{prefix}", HexColor.hex(MessagesFile.msgfc.getString("messages.prefix")).replaceAll("&", "§"));
         }
-        System.out.println("ERROR! " + params1 + " not found in Messages file!");
-        return null;
-    }
-
-    public static String convertStringCFG(@NotNull final String params1) {
-        if (Claim.getInstance().getConfig().isSet(params1) != false) {
-            return HexColor.hex(Claim.getInstance().getConfig().getString(params1)).replaceAll("&", "§");
-        }
-        System.out.println("ERROR! " + params1 + " not found in Config file!");
+        Claim.getInstance().getLogger().warning("ERROR! " + params1 + " not found in Messages file!");
         return null;
     }
 

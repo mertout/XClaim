@@ -19,21 +19,21 @@ public enum MinecraftVersion {
     MC1_7_R4(174), MC1_8_R3(183), MC1_9_R1(191), MC1_9_R2(192), MC1_10_R1(1101), MC1_11_R1(1111), MC1_12_R1(1121),
     MC1_13_R1(1131), MC1_13_R2(1132), MC1_14_R1(1141), MC1_15_R1(1151), MC1_16_R1(1161), MC1_16_R2(1162),
     MC1_16_R3(1163), MC1_17_R1(1171), MC1_18_R1(1181, true), MC1_18_R2(1182, true), MC1_19_R1(1191, true),
-    MC1_19_R2(1192, true), MC1_19_R3(1193, true);
+    MC1_19_R2(1192, true), MC1_19_R3(1193, true), MC1_20_R1(1201, true);
 
     private static MinecraftVersion version;
     private static Boolean hasGsonSupport;
     private static Boolean isForgePresent;
     private static boolean bStatsDisabled = false;
     private static boolean disablePackageWarning = false;
-    private static boolean updateCheckDisabled = false;
+    private static boolean updateCheckDisabled = true;
     /**
      * Logger used by the api
      */
     private static Logger logger = Logger.getLogger("NBTAPI");
 
     // NBT-API Version
-    protected static final String VERSION = "2.11.2";
+    protected static final String VERSION = "2.11.3";
 
     private final int versionId;
     private final boolean mojangMapping;
@@ -116,7 +116,7 @@ public enum MinecraftVersion {
             logger.info("[NBTAPI] NMS support '" + version.name() + "' loaded!");
         } else {
             logger.warning("[NBTAPI] This Server-Version(" + ver + ") is not supported by this NBT-API Version("
-                    + VERSION + ") located at " + MinecraftVersion.class.getName()
+                    + VERSION + ") located in " + VersionChecker.getPlugin()
                     + ". The NBT-API will try to work as good as it can! Some functions may not work!");
         }
         init();
@@ -153,6 +153,18 @@ public enum MinecraftVersion {
             logger.warning(
                     "Maven Shade plugin to relocate the api to your personal location! If you are not the developer,");
             logger.warning("please check your plugins and contact their developer, so they can fix this issue.");
+            logger.warning(
+                    "#########################################- NBTAPI -#########################################");
+        }
+        if (!disablePackageWarning && !"NBTAPI".equals(VersionChecker.getPlugin())
+                && MinecraftVersion.class.getPackage().getName().equals("de.tr7zw.nbtapi.utils")) {
+            logger.warning(
+                    "#########################################- NBTAPI -#########################################");
+            logger.warning(
+                    "The NBT-API inside " + VersionChecker.getPlugin() + " is located at 'de.tr7zw.nbtapi.utils'!");
+            logger.warning(
+                    "This package name is reserved for the official NBTAPI plugin, and not intended to be used for shading!");
+            logger.warning("Please change the relocate to something else. For example: com.example.util.nbtapi");
             logger.warning(
                     "#########################################- NBTAPI -#########################################");
         }
@@ -208,6 +220,14 @@ public enum MinecraftVersion {
      */
     public static void disableUpdateCheck() {
         updateCheckDisabled = true;
+    }
+
+    /**
+     * Enables the update check. Uses Spiget to get the current version and prints a
+     * warning when outdated.
+     */
+    public static void enableUpdateCheck() {
+        updateCheckDisabled = false;
     }
 
     /**

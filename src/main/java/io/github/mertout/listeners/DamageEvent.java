@@ -5,13 +5,14 @@ import org.bukkit.event.EventHandler;
 import io.github.mertout.filemanager.files.MessagesFile;
 import io.github.mertout.Claim;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.Listener;
 import io.github.mertout.core.ClaimManager;
 
 public class DamageEvent extends ClaimManager implements Listener
 {
-    @EventHandler
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onEntityDamage(final EntityDamageByEntityEvent e) {
         if (e.getDamager() instanceof Arrow && e.getEntity() instanceof Player) {
             if (super.getChunkClaim(e.getEntity().getLocation()) != null) {

@@ -1,11 +1,12 @@
-package io.github.mertout.core.data.task;
+package io.github.mertout.core.timer;
 
 import io.github.mertout.Claim;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 public class DataTimer implements Runnable {
-    public DataTimer(int tick) {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask((Plugin)Claim.getInstance(), this, 0L, tick);
+
+    public DataTimer() {
+        int sec = Claim.getInstance().getConfig().getInt("settings.data-save-time");
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Claim.getInstance(), this, 0L, 20L * sec);
     }
 
     @Override

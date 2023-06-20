@@ -4,17 +4,20 @@ import io.github.mertout.Claim;
 import io.github.mertout.filemanager.files.MessagesFile;
 import io.github.mertout.gui.GuiCreator;
 import io.github.mertout.gui.GuiType;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import io.github.mertout.core.data.DataHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.Listener;
 import io.github.mertout.core.ClaimManager;
 
-public class BlockClickEvent extends ClaimManager implements Listener {
-    @EventHandler
+public class BlockClickEvent extends ClaimManager implements Listener
+{
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     public void onClick(PlayerInteractEvent e) {
         if (e.getAction() == Action.LEFT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_BLOCK) {
             if (super.hasClaimAtLocation(e.getClickedBlock().getLocation(), e.getPlayer())) {
@@ -27,7 +30,7 @@ public class BlockClickEvent extends ClaimManager implements Listener {
             final DataHandler data = super.getChunkClaim(e.getClickedBlock().getLocation());
             Player p = e.getPlayer();
             if (data != null && data.getBlockLocation().equals(e.getClickedBlock().getLocation())) {
-                if (!data.getOwner().equals(p.getName())) {
+                if (!data.getOwner().equals(p.getName()) || !data.getChunk().equals(p.getLocation().getChunk().toString())) {
                     e.setCancelled(true);
                     return;
                 }

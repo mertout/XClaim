@@ -1,9 +1,9 @@
 package io.github.mertout.core.data;
 
+import eu.decentsoftware.holograms.api.holograms.Hologram;
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import org.bukkit.Location;
 
 public class DataHandler
@@ -15,8 +15,8 @@ public class DataHandler
     private Integer hour;
     private Integer minutes;
     private Integer seconds;
-    private Hologram holohd;
-    private eu.decentsoftware.holograms.api.holograms.Hologram holodh;
+
+    private Hologram hologram;
 
     private final List<String> members;
 
@@ -38,11 +38,11 @@ public class DataHandler
         return this.owner;
     }
 
-    public Integer getDay() {
+    public Integer getDays() {
         return this.day;
     }
 
-    public Integer getHour() {
+    public Integer getHours() {
         return this.hour;
     }
 
@@ -54,11 +54,8 @@ public class DataHandler
         return this.seconds;
     }
 
-    public Hologram getHoloHD() {
-        return this.holohd;
-    }
-    public eu.decentsoftware.holograms.api.holograms.Hologram getHoloDH() {
-        return this.holodh;
+    public Hologram getHologram() {
+        return this.hologram;
     }
     public List<String> getMembers() {
         return this.members;
@@ -96,11 +93,8 @@ public class DataHandler
         this.seconds = s;
     }
 
-    public void setHoloHD(@NotNull final Hologram h) {
-        this.holohd = h;
-    }
-    public void setHoloDH(@NotNull final eu.decentsoftware.holograms.api.holograms.Hologram h) {
-        this.holodh = h;
+    public void setHologram(@NotNull final Hologram h) {
+        this.hologram = h;
     }
     public void addDay(@NotNull final Integer d) {
         this.day += d;

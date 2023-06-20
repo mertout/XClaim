@@ -12,15 +12,15 @@ import java.util.List;
 public class ClaimAPI {
 
     public static boolean isHasClaim(@NotNull Player p) {
-        return Claim.getInstance().getClaimManager().hasClaim(p);
+        return !Claim.getInstance().getClaimManager().getPlayerClaims(p).isEmpty();
     }
 
     public static boolean isMemberAnyClaim(@NotNull Player p) {
-        return Claim.getInstance().getClaimManager().getPlayerClaim(p) != null;
+        return !Claim.getInstance().getClaimManager().getPlayerClaims(p).isEmpty();
     }
 
-    public static DataHandler getClaim(@NotNull Player p) {
-        return Claim.getInstance().getClaimManager().getPlayerClaim(p);
+    public static List<DataHandler> getClaim(@NotNull Player p) {
+        return Claim.getInstance().getClaimManager().getPlayerClaims(p);
     }
 
     public static String getClaimRemaining(@NotNull DataHandler data) {
@@ -48,7 +48,7 @@ public class ClaimAPI {
     }
 
     public static boolean isClaimableForPlayer(@NotNull Location loc, @NotNull Player p) {
-        return !Claim.getInstance().getClaimManager().hasClaim(p) && Claim.getInstance().getClaimManager().getChunkClaim(p.getLocation()) == null;
+        return Claim.getInstance().getClaimManager().getChunkClaim(p.getLocation()) == null;
     }
 
     public static boolean hasClaimAtLocation(@NotNull Location loc, @NotNull Player p) {

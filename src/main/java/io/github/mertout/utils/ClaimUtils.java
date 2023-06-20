@@ -6,6 +6,8 @@ import io.github.mertout.api.events.ClaimDayRenewEvent;
 import io.github.mertout.core.data.DataHandler;
 import io.github.mertout.core.timer.MoveTimer;
 import io.github.mertout.filemanager.files.MessagesFile;
+import io.github.mertout.hooks.Vault;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -20,8 +22,10 @@ public class ClaimUtils {
         }
         return HexColor.hex(MessagesFile.convertString("messages.status.offline"));
     }
-    public static void memberKick(@NotNull Player p, @NotNull String owner) {
-        DataHandler data = Claim.getInstance().getClaimManager().getPlayerClaim(p);
+    public static void memberKick(@NotNull Player p, @NotNull String owner, @NotNull DataHandler data) {
+        if (data == null || !data.getOwner().equals(p.getName())) {
+            return;
+        }
         if (data.getMembers().contains(owner)) {
             data.getMembers().remove(owner);
             p.getOpenInventory().close();
@@ -29,28 +33,27 @@ public class ClaimUtils {
         }
     }
 
-    public static void renewDay(@NotNull Player p) {
-        if (Claim.getInstance().getClaimManager().hasClaim(p)) {
-            if (!(Claim.getInstance().getEconomy().getBalance(p) >= Claim.getInstance().getConfig().getInt("settings.renew-day-cost"))) {
-                p.sendMessage(MessagesFile.convertString("messages.dont-have-money").replace("{money}", Claim.getInstance().getConfig().getString("settings.renew-day-cost")));
-                return;
-            }
-            DataHandler data = Claim.getInstance().getClaimManager().getPlayerClaim(p);
-            ClaimDayRenewEvent event = new ClaimDayRenewEvent(p, data);
-            Bukkit.getServer().getPluginManager().callEvent(event);
-            if (!event.isCancelled()) {
-                Claim.getInstance().getEconomy().withdrawPlayer(p, Claim.getInstance().getConfig().getInt("settings.renew-day-cost"));
-                data.addDay(Claim.getInstance().getConfig().getInt("settings.claim-day"));
-                p.sendMessage(MessagesFile.convertString("messages.renewed-day").replace("{day}", data.getDay() + "").replace("{hour}", data.getHour() + "").replace("{minute}", data.getMinutes() + "").replace("{second}", data.getSeconds() + ""));
-            }
-        }
-    }
-    public static void moveClaimBlock(final Player p) {
-        if (!Claim.getInstance().getClaimManager().hasClaim(p)) {
-            p.sendMessage(MessagesFile.convertString("messages.move-claim-block-error"));
+    public static void renewDay(@NotNull Player p, @NotNull DataHandler data) {
+        if (data == null || !data.getOwner().equals(p.getName())) {
             return;
         }
-        final DataHandler data = Claim.getInstance().getClaimManager().getPlayerClaim(p);
+        Economy eco = Claim.getInstance().getVault().getEconomy();
+        if (!(eco.getBalance(p) >= Claim.getInstance().getConfig().getInt("settings.renew-day-cost"))) {
+            p.sendMessage(MessagesFile.convertString("messages.dont-have-money").replace("{money}", Claim.getInstance().getConfig().getString("settings.renew-day-cost")));
+            return;
+        }
+        ClaimDayRenewEvent event = new ClaimDayRenewEvent(p, data);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+        if (!event.isCancelled()) {
+            eco.withdrawPlayer(p, Claim.getInstance().getConfig().getInt("settings.renew-day-cost"));
+            data.addDay(Claim.getInstance().getConfig().getInt("settings.claim-day"));
+            p.sendMessage(MessagesFile.convertString("messages.renewed-day").replace("{day}", data.getDays() + "").replace("{hour}", data.getHours() + "").replace("{minute}", data.getMinutes() + "").replace("{second}", data.getSeconds() + ""));
+        }
+    }
+    public static void moveClaimBlock(@NotNull final Player p, @NotNull DataHandler data) {
+        if (data == null || !data.getOwner().equals(p.getName())) {
+            return;
+        }
         if (!p.getLocation().getChunk().toString().equals(data.getChunk())) {
             p.sendMessage(MessagesFile.convertString("messages.move-claim-block-error"));
             return;

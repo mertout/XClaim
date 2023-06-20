@@ -55,7 +55,7 @@ public class GiveCommand extends SubCommand {
         Player target = Bukkit.getPlayer(strings[1]);
         ItemStack is = new ItemStack(Material.matchMaterial(Claim.getInstance().getConfig().getString("settings.claim-block.material")));
         final ItemMeta im = is.getItemMeta();
-        im.setDisplayName(MessagesFile.convertStringCFG("settings.claim-block.display-name"));
+        im.setDisplayName(HexColor.hex(Claim.getInstance().getConfig().getString("settings.claim-block.display-name")));
         final ArrayList<String> lore = new ArrayList<String>();
         for (final String str : Claim.getInstance().getConfig().getStringList("settings.claim-block.lore")) {
             lore.add(HexColor.hex(str).replaceAll("&", "§"));

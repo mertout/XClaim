@@ -4,7 +4,7 @@ gui:
   size: 6 #size is valid for chest only!
   items:
     1:
-      material: MAP
+      material: PLAYER_HEAD
       display-name: "#00FF00Member list!"
       lore:
         - "#FFA500Click and see!"
@@ -18,26 +18,33 @@ gui:
       slot: 1
       action: [Member-Add]
     3:
-      material: FIREWORK_ROCKET
+      material: CLOCK
       display-name: "#00FF00Renew day!"
       lore:
         - "#FFA500Click and renew!"
       slot: 2
       action: [Renew-Day]
     4:
-      material: BARRIER
-      display-name: "#f70d1aDelete claim!"
+      material: FILLED_MAP
+      display-name: "#00FF00Look chunks"
       lore:
-        - "#FFA500Click and delete!"
+        - "#FFA500Click and look chunks!"
       slot: 6
-      action: [Delete-Claim]
+      action: [Look-Chunks]
     5:
       material: BEDROCK
-      display-name: "#45B8ACMove claim block!"
+      display-name: "#00FF00Move claim block!"
       lore:
         - "#FFA500Click and move!"
       slot: 7
       action: [Move-Claim-Block]
+    6:
+      material: BARRIER
+      display-name: "#00FF00Delete claim!"
+      lore:
+        - "#FFA500Click and delete!"
+      slot: 8
+      action: [Delete-Claim]
     glass:
       material: BLACK_STAINED_GLASS_PANE
       display-name: " "

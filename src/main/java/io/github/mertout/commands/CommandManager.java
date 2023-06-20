@@ -1,14 +1,6 @@
 package io.github.mertout.commands;
 
-import io.github.mertout.commands.impl.BypassCommand;
-import io.github.mertout.commands.impl.DeleteCommand;
-import io.github.mertout.commands.impl.GiveCommand;
-import io.github.mertout.commands.impl.ReloadCommand;
-import io.github.mertout.commands.impl.days.AddDayCommand;
-import io.github.mertout.commands.impl.days.RemoveDayCommand;
-import io.github.mertout.commands.impl.days.SetDayCommand;
-import io.github.mertout.commands.impl.members.AddMemberCommand;
-import io.github.mertout.commands.impl.members.RemoveMemberCommand;
+import io.github.mertout.commands.impl.*;
 import io.github.mertout.filemanager.files.MessagesFile;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -25,13 +17,7 @@ public class CommandManager implements CommandExecutor {
     public CommandManager(){
         subcommands.add(new ReloadCommand());
         subcommands.add(new GiveCommand());
-        subcommands.add(new DeleteCommand());
         subcommands.add(new BypassCommand());
-        subcommands.add(new AddMemberCommand());
-        subcommands.add(new RemoveMemberCommand());
-        subcommands.add(new AddDayCommand());
-        subcommands.add(new RemoveDayCommand());
-        subcommands.add(new SetDayCommand());
     }
 
     @Override

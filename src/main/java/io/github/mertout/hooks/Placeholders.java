@@ -1,4 +1,4 @@
-package io.github.mertout.placeholders;
+package io.github.mertout.hooks;
 
 import io.github.mertout.Claim;
 import io.github.mertout.core.ClaimManager;
@@ -14,57 +14,41 @@ public class Placeholders extends PlaceholderExpansion
     public String getAuthor() {
         return "mert.out";
     }
-    
+
     @NotNull
     public String getIdentifier() {
         return "xclaim";
     }
-    
+
     @NotNull
     public String getVersion() {
-        return "1.3";
+        return "1.5.2";
     }
-    
+
     public boolean persist() {
         return true;
     }
 
-    public String onPlaceholderRequest(final Player p, @NotNull final String identifier) {
+    public String onPlaceholderRequest(@NotNull final Player p, @NotNull final String identifier) {
         ClaimManager claimManager = Claim.getInstance().getClaimManager();
-        DataHandler claim = claimManager.getPlayerClaim(p);
         DataHandler chunk = claimManager.getChunkClaim(p.getLocation());
         switch (identifier) {
             case "owner":
-                if (claim != null) {
-                    return claim.getOwner().toString();
-                }
-                return "";
-            case "team_size":
-                if (claim != null) {
-                    return claim.getMembers().size() + "";
-                }
-                return "";
-            case "owner_via_location":
                 if (chunk != null) {
                     return chunk.getOwner().toString();
                 }
                 return "";
-            case "team_size_via_location":
+            case "team_size":
                 if (chunk != null) {
                     return chunk.getMembers().size() + "";
                 }
                 return "";
-            case "remaining":
-                if (claim != null) {
-                    return ClaimManager.calcTime(claim);
-                }
-                return "";
-            case "remaining_via_location":
+            case "remaining_time":
                 if (chunk != null) {
                     return ClaimManager.calcTime(chunk);
                 }
                 return "";
-            case "ownership_via_location":
+            case "status":
                 if (chunk != null) {
                     return MessagesFile.convertString("messages.ownership.taken");
                 }

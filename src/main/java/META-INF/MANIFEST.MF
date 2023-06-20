@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: io.github.mertout.Claim
-Class-Path: PlaceholderAPI-2.11.1.jar Vault.jar HolographicDisplays.jar 
- annotations-22.0.0.jar lombok-1.18.22.jar
-

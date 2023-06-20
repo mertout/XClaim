@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 public class HologramTimer implements Runnable
 {
     public HologramTimer() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(Claim.getInstance(), this, 0L, 20L);
+        Bukkit.getScheduler().scheduleSyncRepeatingTask(Claim.getInstance(), this, 40L, 20L);
     }
     
     @Override

@@ -2,9 +2,12 @@ settings:
     lang: en_US
     update-checker: true
     renew-day-cost: 100000
-    move-block-cooldown: 3600 #(1 Hours)
+    move-block-cooldown: 3600 #(1 Hours) (-1 to disable)
     claim-day: 30
+    #for more than xclaim.max.member.<max>
     default-max-member-in-claim: 3
+    #for more than xclaim.max.claim.<max>
+    default-max-per-claim: 3
     #if attacker is not attached in the claim
     #can't hit anyone!
     pvp-in-claim: true
@@ -14,7 +17,10 @@ settings:
     #ALL = Broadcast all world the claim expired message
     #WORLD = Broadcast claim's world the claim expired message
     claim-expired-broadcast: WORLD
-    data-save-tick: 6000 #(5 minutes) (-1 to disable)
+    data-backup-time: 1800 #(30 minutes) (-1 to disable)
+    data-save-time: 300 #(5 minutes) (-1 to disable)
+    look-chunk-seconds: 15
+    claim-create-cooldown: 300 #(5 minutes) (-1 to disable or xclaim.bypass.cooldown)
     #disabled commands in the claim
     #the player cannot run these commands if they are not member of claim
     disabled-commands:
