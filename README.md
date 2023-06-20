@@ -19,7 +19,7 @@ _Maven:_
 <dependency>
     <groupId>com.github.mertout</groupId>
     <artifactId>XClaim</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4</version>
 </dependency>  
 ```
 
