@@ -4,7 +4,7 @@
 > - Java 16+
 > - Vault
 > - Placeholders API(optional)
-> - Holographic Displays or DecentHolograms
+> - DecentHolograms
 > - EssentialsX(or different economy plugin)
 
 _Maven:_
