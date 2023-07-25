@@ -19,7 +19,7 @@ _Maven:_
 <dependency>
     <groupId>github.mertout</groupId>
     <artifactId>XClaim</artifactId>
-    <version>1.5.2</version>
+    <version>1.5.2-SNAPSHOT</version>
 </dependency>  
 ```
 
@@ -33,6 +33,6 @@ allprojects {
 }
 
 dependencies {
-	implementation 'github.mertout:XClaim:1.5.2'
+	implementation 'github.mertout:XClaim:1.5.2-SNAPSHOT'
 }
 ```
